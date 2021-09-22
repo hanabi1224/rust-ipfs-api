@@ -150,7 +150,8 @@ pub trait IpfsApi: Backend {
                 Some(prefix) => path.strip_prefix(prefix).unwrap(),
                 None => path.as_path(),
             }
-            .to_string_lossy();
+            .to_string_lossy()
+            .replace("\\", "/");
 
             if it < FILE_DESCRIPTOR_LIMIT {
                 form.add_reader_file("path", file, file_name);
